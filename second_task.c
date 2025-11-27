@@ -50,6 +50,7 @@ Return NULL if there is no such element.
 
 
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct ListEl {
     int data;
@@ -74,13 +75,68 @@ ListEl *list_build(void) {
     return lis;
 }
 
+void printer(ListEl* head){
+    ListEl* p = head;
+    while (p != NULL)
+    {
+        printf("%d", p->data);
+        p = p->nxt;
+    }
+    
+}
+
+int countLen(ListEl* head){
+    int count= 0;
+    ListEl* p = head;
+
+    while (p != NULL)
+    {
+        count++;
+        p = p->nxt;
+    }
+
+    return count;
+    
+    
+}
+
+void freer(ListEl **head){
+    ListEl* p = *head;
+    while (p != NULL)
+    {
+        ListEl *next = p;
+        free(p);
+        p = next->nxt;
+    }
+    
+}
+
+ListEl* addHead(ListEl* head, int num){
+    ListEl* u = malloc(sizeof(ListEl));
+    if(u == NULL) return head;
+
+    u->data = num;
+    u->nxt = head;
+
+    return u;
+}
+
 
 int main(void) {
     ListEl *head;
+
+    head = addHead(head, 29);
+
+    printf("%d", head->data);
     
-    head = list_build();
+    //head = list_build();
+
+    //printer(head); 
+/*     int i = countLen(head);
+
+    printf("%d", i); */
     
-    //here print the list!
+    
     
     return 0;   
 }
